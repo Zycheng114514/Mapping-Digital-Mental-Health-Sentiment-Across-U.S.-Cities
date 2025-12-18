@@ -1,0 +1,136 @@
+---
+title: "visualization2"
+author: "lexie"
+format: html
+editor: visual
+---
+
+```{r}
+library(dplyr)
+library(pacman)
+library(readxl)
+p_load(tidyverse,ggplot2)
+```
+
+```{r}
+
+dta2 <- read_csv("true_merged.csv")
+```
+
+```{r}
+dta2$new_negative_rate <- dta2$new_negative_rate * 100
+
+```
+
+```{r}
+library(ggplot2)
+library(dplyr)
+library(forcats)
+
+
+dta_heat <- dta2 %>%
+  filter(year != 2008) %>%   
+  mutate(city = fct_reorder(city, total_observations, .desc = TRUE))
+
+
+ggplot(data = dta_heat,
+       aes(x = city, y = factor(year), fill = new_negative_rate)) +
+  
+  geom_tile(color = "white", linewidth = 0.4) +
+  
+  scale_fill_gradient(
+    low = "#FFF200",   
+    high = "#8B00FF",  
+    name = "Negative Rate"
+  ) +
+  
+  theme_minimal(base_size = 15) +
+  theme(
+    axis.text.x = element_text(angle = 45, hjust = 1, vjust = 1, size = 11),
+    axis.text.y = element_text(size = 11),
+    axis.title = element_text(size = 13),
+    legend.title = element_text(size = 12),
+    legend.text = element_text(size = 10),
+    plot.title = element_text(size = 18, face = "bold"),
+    panel.grid = element_blank()
+  ) +
+  
+  labs(
+    title = "Negative Rate by City and Year",
+    x = "City",
+    y = "Year"
+  ) +
+  
+  coord_fixed()
+```
+
+```{r}
+library(dplyr)
+dta2 <- dta2 %>%
+  filter(year != 2008) %>%   
+  mutate(city = fct_reorder(city, total_observations, .desc = TRUE))
+
+city_groups <- dta2 %>%
+  group_by(city) %>%
+  summarise(mean_neg = mean(new_negative_rate, na.rm = TRUE)) %>%
+  arrange(desc(mean_neg))
+
+top_bottom_cities <- city_groups %>%
+  slice(c(1:3, (n() - 2):n())) %>%  # top 3 + bottom 3
+  pull(city)
+
+dta_filtered <- dta2 %>%
+  filter(city %in% top_bottom_cities)
+```
+
+```{r}
+p2 <- ggplot(dta_filtered %>% filter(year >= 2015 & year <= 2024),
+       aes(x = year, y = new_negative_rate, group = city, color = city)) +
+  
+  geom_line(linewidth = 1.1) +
+  geom_point(size = 2.8) +
+  
+  
+  geom_vline(xintercept = 2020,
+             linetype = "dashed",
+             color = "grey40",
+             linewidth = 1) +
+  
+  annotate("text", x = 2020, y = 2.6,
+           label = "COVID-19", color = "grey40",
+           angle = 90, vjust = -0.5, size = 4.2) +
+  
+  
+  scale_y_continuous(
+    limits = c(0.5, 1.5),
+    breaks = seq(0.5, 2, by = 0.25)
+  ) +
+  
+  scale_x_continuous(
+    limits = c(2015, 2024),
+    breaks = seq(2015, 2024, by = 1)
+  ) +
+  
+  labs(
+    title = "Trends(NEW): Top 3 and Bottom 3 Cities (2015–2024)",
+    x = "Year",
+    y = "New Negative Sentiment Rate",
+    color = "City"
+  ) +
+  
+  theme_minimal(base_size = 15) +
+  theme(
+    plot.title = element_text(size = 20, face = "bold", hjust = 0.5),
+    axis.text.x = element_text(angle = 30, hjust = 1, size = 12),
+    axis.text.y = element_text(size = 12),
+    legend.title = element_text(size = 13, face = "bold"),
+    legend.text = element_text(size = 11),
+    legend.position = "right",
+    panel.grid.major.x = element_blank(),
+    panel.grid.minor = element_blank()
+  )
+
+ggsave("negative_trend_2015_2024.png", p2,
+       width = 9, height = 5, dpi = 300)
+p2
+```
