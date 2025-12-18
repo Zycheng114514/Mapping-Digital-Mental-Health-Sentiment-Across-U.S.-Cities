@@ -5,7 +5,8 @@ format: html
 editor: visual
 ---
 
-```{if (!require("pacman")) install.packages("pacman")}
+```{r}
+if (!require("pacman")) install.packages("pacman")
 
 pacman::p_load(
   tidyverse,
@@ -50,7 +51,6 @@ analyze_topic_model <- function(topic_models_list, estimates_list, custom_labels
     print(paste("Analyzing Model with K =", topic_number))
     
     # --- Handle Labels ---
-    # If no labels provided (or length mismatch), default to "Topic X"
     if (is.null(custom_labels) || length(custom_labels) != topic_number) {
       if(!is.null(custom_labels)) warning("Label count does not match K. Using defaults.")
       model_labels <- paste("Topic", 1:topic_number)
@@ -72,7 +72,7 @@ analyze_topic_model <- function(topic_models_list, estimates_list, custom_labels
     gamma <- tidy(topic_model, matrix = "gamma", document_names = rownames(meta)) %>%
       group_by(topic) %>%
       summarise(gamma = mean(gamma)) %>%
-      left_join(label_df, by = "topic") %>%  # Join custom labels
+      left_join(label_df, by = "topic") %>%  
       arrange(desc(gamma)) %>%
       mutate(topic_label = paste0(topic, ": ", label_text),
              topic_label = reorder(topic_label, gamma))
@@ -97,7 +97,7 @@ analyze_topic_model <- function(topic_models_list, estimates_list, custom_labels
     top_words_1 <- tidy(topic_model, matrix = "beta") %>%
       group_by(topic) %>%
       slice_max(beta, n = 1) %>%
-      left_join(label_df, by="topic") %>% # Join labels
+      left_join(label_df, by="topic") %>% 
       arrange(topic, -beta)
     
     p1 <- ggplot(top_words_1, aes(x = beta, y = factor(label_text, levels = model_labels))) +
@@ -118,13 +118,13 @@ analyze_topic_model <- function(topic_models_list, estimates_list, custom_labels
       group_by(topic) %>%
       slice_max(beta, n = 10) %>%
       ungroup() %>%
-      left_join(label_df, by="topic") %>% # Join labels
+      left_join(label_df, by="topic") %>% 
       mutate(topic_name = factor(label_text, levels = model_labels),
              term = reorder_within(term, beta, topic_name)) %>%
       ggplot(aes(x = term, y = beta, fill = topic_name)) +
       geom_col(show.legend = FALSE) +
       scale_y_continuous(limits = c(0, max_beta)) +
-      facet_wrap(~ topic_name, scales = "free_y") + # Facet by Name
+      facet_wrap(~ topic_name, scales = "free_y") + 
       coord_flip() +
       scale_x_reordered() +
       labs(x = NULL, y = "Beta") +
@@ -135,10 +135,14 @@ analyze_topic_model <- function(topic_models_list, estimates_list, custom_labels
            plot = p2, width = 14, height = 12, bg="white")
     
     # 8. Plot: Topic Correlations (Network)
+    # FIX: Changed 'vertex.label' to 'vlabels'
     png(paste0(output_dir, "corr_network.png"), width = 1000, height = 800)
     topic_corr <- topicCorr(topic_model, cutoff = 0.03)
-    # Use custom labels for vertices
-    plot(topic_corr, vertex.label = model_labels, vertex.label.cex = 0.8) 
+    tryCatch({
+      plot(topic_corr, vlabels = model_labels, vertex.label.cex = 0.8) 
+    }, error = function(e) {
+      message("Network plot failed (likely low correlation or cutoff issues): ", e$message)
+    })
     dev.off()
     
     # 9. Plot: Prevalence (Date)
@@ -152,7 +156,7 @@ analyze_topic_model <- function(topic_models_list, estimates_list, custom_labels
         covariate = "date_numeric",
         method = "continuous",
         topics = c(k),
-        main = model_labels[k], # Use Custom Label as Title
+        main = model_labels[k], 
         xlab = "Time",
         linecol = "blue"
       )
