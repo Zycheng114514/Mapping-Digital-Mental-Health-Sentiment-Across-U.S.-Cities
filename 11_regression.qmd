@@ -1,0 +1,143 @@
+---
+title: "visualization1"
+author: "lexie"
+format: html
+editor: visual
+---
+
+```{r}
+library(pacman)
+library(readxl)
+p_load(tidyverse,ggplot2)
+```
+
+```{r}
+dta <- read_csv("true_merged.csv")
+```
+
+```{r}
+dta$negative_rate <- dta$negative_rate * 100
+dta$new_negative_rate <- dta$new_negative_rate * 100
+```
+
+```{r}
+model_a<-lm(negative_rate~density+income+average_years_schooling + mean_work_hours + mental_health_provider_rate, data= dta)
+summary(model_a)
+```
+
+```{r}
+
+```{r}
+model_b<-lm(new_negative_rate~density+income+average_years_schooling + mean_work_hours + mental_health_provider_rate, data= dta)
+summary(model_b)
+```
+
+
+
+```{r}
+library(modelsummary)
+library(gt)
+
+# Create the table object
+final_table <- msummary(
+  model_a,
+  coef_map = var_labels,
+  statistic = c("std.error", "statistic", "p.value", "conf.low", "conf.high"),
+  shape = term ~ model + statistic,
+  fmt = "%.4f", 
+  gof_map = NA, 
+  output = "gt"
+) %>%
+  # 1. Add the requested title
+  tab_header(
+    title = md("**Regression Results on Negative Sentiment**")
+  ) %>%
+  # 2. Set font to Times New Roman
+  opt_table_font(
+    font = list(google_font(name = "Times New Roman"), "Times", "serif")
+  ) %>%
+  # 3. Rename columns by position
+  cols_label(
+    2 ~ "coef", 3 ~ "std err", 4 ~ "t", 
+    5 ~ "P > |t|", 6 ~ "[0.025", 7 ~ "0.975]"
+  ) %>%
+  # 4. Apply bold styling to header and first column
+  tab_style(
+    style = cell_text(weight = "bold"),
+    locations = list(cells_column_labels(), cells_body(columns = 1))
+  ) %>%
+  # 5. Professional "Statsmodels" style borders
+  tab_options(
+    table.border.top.style = "none",
+    column_labels.border.top.color = "black",
+    column_labels.border.top.width = px(2),
+    column_labels.border.bottom.color = "black",
+    column_labels.border.bottom.width = px(1),
+    table.border.bottom.color = "black",
+    table.border.bottom.width = px(2),
+    table_body.hlines.style = "none",
+    table.width = px(850),
+    heading.title.font.size = px(20) # Optional: adjust title size
+  )
+
+# --- SAVE OPTIONS ---
+gtsave(final_table, "regression_table.png")
+gtsave(final_table, "regression_table.docx")
+```
+
+
+```{r}
+library(modelsummary)
+library(gt)
+
+# Create the table object
+final_table <- msummary(
+  model_b,
+  coef_map = var_labels,
+  statistic = c("std.error", "statistic", "p.value", "conf.low", "conf.high"),
+  shape = term ~ model + statistic,
+  fmt = "%.4f", 
+  gof_map = NA, 
+  output = "gt"
+) %>%
+  # 1. Add the requested title
+  tab_header(
+    title = md("**Regression Results on New Negative Sentiment**")
+  ) %>%
+  # 2. Set font to Times New Roman
+  opt_table_font(
+    font = list(google_font(name = "Times New Roman"), "Times", "serif")
+  ) %>%
+  # 3. Rename columns by position
+  cols_label(
+    2 ~ "coef", 3 ~ "std err", 4 ~ "t", 
+    5 ~ "P > |t|", 6 ~ "[0.025", 7 ~ "0.975]"
+  ) %>%
+  # 4. Apply bold styling to header and first column
+  tab_style(
+    style = cell_text(weight = "bold"),
+    locations = list(cells_column_labels(), cells_body(columns = 1))
+  ) %>%
+  # 5. Professional "Statsmodels" style borders
+  tab_options(
+    table.border.top.style = "none",
+    column_labels.border.top.color = "black",
+    column_labels.border.top.width = px(2),
+    column_labels.border.bottom.color = "black",
+    column_labels.border.bottom.width = px(1),
+    table.border.bottom.color = "black",
+    table.border.bottom.width = px(2),
+    table_body.hlines.style = "none",
+    table.width = px(850),
+    heading.title.font.size = px(20) # Optional: adjust title size
+  )
+
+# --- SAVE OPTIONS ---
+gtsave(final_table, "regression_table2.png")
+gtsave(final_table, "regression_table2.docx")
+```
+
+
+
+
+
