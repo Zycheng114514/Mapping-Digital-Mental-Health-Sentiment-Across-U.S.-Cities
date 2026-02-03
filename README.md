@@ -1,4 +1,4 @@
-# Mapping Digital Mental Health Sentiment Across U.S. Cities
+# The Relationship Between Mental Health Provider Density and Online Emotional Expression
 
 This repository contains the code and data pipeline for investigating mental health sentiment across 11 major U.S. cities. By combining **Natural Language Processing (NLP)** with **Socioeconomic Data**, this project explores how city-level emotional distress relates to local economic conditions and the availability of mental health services.
 
@@ -48,3 +48,5 @@ To replicate this research, please run the scripts in the `codes/` folder accord
 
 ## Other things to notice
 1.  ** the sample data used to train the model to identify unrelated observations from all posts is not sampled from the all_word corpus(observation that contain direct words and non-direct words). For 8000 observations, 4000 observations are sampled from observations that contain depression and suicide related words, while another 4000 observations are sampled from direct-word corpus. The final sample dataset has been deduplicated.
+
+2.  ** the Reddit corpus data used by this project was got accessed through [this](https://www.reddit.com/r/pushshift/comments/1itme1k/separate_dump_files_for_the_top_40k_subreddits/)
