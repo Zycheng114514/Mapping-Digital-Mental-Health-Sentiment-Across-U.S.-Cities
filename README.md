@@ -1,4 +1,4 @@
-# The Relationship Between Mental Health Provider Density and Online Emotional Expression
+# Mapping Digital Mental Health Sentiment Across U.S. Cities
 
 This repository contains the code and data pipeline for investigating mental health sentiment across 11 major U.S. cities. By combining **Natural Language Processing (NLP)** with **Socioeconomic Data**, this project explores how city-level emotional distress relates to local economic conditions and the availability of mental health services.
 
