@@ -23,7 +23,7 @@ Traditional mental health monitoring often lacks geographic granularity and suff
 ---
 
 ## 📊 Methodology
-* **Sentiment Classification:** A **RoBERTa-base** model fine-tuned on 8,000 GPT-labeled observations (accuracy >95%).
+* **Text Classification:** A **RoBERTa-base** model adding a single layer and trying on 8,000 GPT-labeled observations (accuracy >90%).
 * **Topic Modeling:** **Structural Topic Modeling (STM)** used to identify 15 distinct thematic topics.
 * **Regression Analysis:** OLS regression modeling the relationship between **Negative Affect Rate** and **Mental Health Provider Rates** (from CountyHealthRankings), controlling for ACS economic variables.
 
