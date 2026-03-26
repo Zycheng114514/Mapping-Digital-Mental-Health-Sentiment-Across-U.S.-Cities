@@ -8,10 +8,10 @@ import os
 import pandas as pd
 import re
 
-INPUT_DIR = "data/processed/by_city"
-OUTPUT_DIR = "data/processed/by_city/negative"
-DIRECT_WORDS_FILE = "data/word_list_direct_words.txt"
-INDIRECT_WORDS_FILE = "data/word_list_indirect_words.txt"
+INPUT_DIR = "../data/processed/by_city"
+OUTPUT_DIR = "../data/processed/by_city/negative"
+DIRECT_WORDS_FILE = "../data/word_list_direct_words.txt"
+INDIRECT_WORDS_FILE = "../data/word_list_indirect_words.txt"
 
 CITY_LIST = [
     "Chicago",

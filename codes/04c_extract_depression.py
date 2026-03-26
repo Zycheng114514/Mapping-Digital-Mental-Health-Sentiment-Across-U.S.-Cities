@@ -2,8 +2,8 @@ import pandas as pd
 import glob
 import os
 
-INPUT_DIR = "data/processed/by_city/negative"
-OUTPUT_DIR = "data/cleaned/depression_corpus.csv"
+INPUT_DIR = "../data/processed/by_city/negative"
+OUTPUT_DIR = "../data/cleaned/depression_corpus.csv"
 
 depress_words = ["depressed", "depressing", "depression", "depressive"] 
 

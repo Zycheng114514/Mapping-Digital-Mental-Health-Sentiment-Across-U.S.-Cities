@@ -6,9 +6,9 @@ import os
 import numpy as np
 import gc
 
-MODEL_DIR = "models/finetuned_categories"
-INPUT_CSV = "data/cleaned/all_words_corpus.csv"
-OUTPUT_CSV = "data/cleaned/all_words_corpus_predicted.csv"
+MODEL_DIR = "../models/finetuned_categories"
+INPUT_CSV = "../data/cleaned/all_words_corpus.csv"
+OUTPUT_CSV = "../data/cleaned/all_words_corpus_predicted.csv"
 BATCH_SIZE = 384
 MAX_LEN = 256
 NUM_LABELS = 2

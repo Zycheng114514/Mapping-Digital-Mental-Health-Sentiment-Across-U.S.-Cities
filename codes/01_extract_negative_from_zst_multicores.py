@@ -10,10 +10,10 @@ import csv
 import re
 import multiprocessing as mp
 
-ZST_FILES_LIST="data/zst_files_list.txt"
-WORD_LIST_FILE="data/word_list.txt"
-ZST_INPUT_DIR="data/raw/reddit_zst"
-OUTPUT_DIR="data/processed"
+ZST_FILES_LIST="../data/zst_files_list.txt"
+WORD_LIST_FILE="../data/word_list.txt"
+ZST_INPUT_DIR="../data/raw/reddit_zst"
+OUTPUT_DIR="../data/processed"
 
 NUM_WORKERS = None # NONE means use all available cores
 

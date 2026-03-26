@@ -1,8 +1,8 @@
 import pandas as pd
 import os
 
-INPUT_FILE = "data/cleaned/direct_corpus_predicted.csv"
-OUTPUT_FILE = "data/cleaned/depression_corpus_predicted.csv"
+INPUT_FILE = "../data/cleaned/direct_corpus_predicted.csv"
+OUTPUT_FILE = "../data/cleaned/depression_corpus_predicted.csv"
 
 depress_words = ["depressed", "depressing", "depression", "depressive"] 
 

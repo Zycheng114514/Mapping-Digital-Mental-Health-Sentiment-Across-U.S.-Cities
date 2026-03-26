@@ -5,10 +5,10 @@ Count observations for each city and year in negative folder, then, combine the 
 import os
 import pandas as pd
 
-NEGATIVE_DIR = "data/processed/by_city/negative"
-TOTAL_COUNTS_FILE = "data/cleaned/city_total_observation_counts.csv"
-INDEPENDENT_VARS_FILE = "data/cleaned/independent_variables_final.csv"
-OUTPUT_DIR = "data/cleaned"
+NEGATIVE_DIR = "../data/processed/by_city/negative"
+TOTAL_COUNTS_FILE = "../data/cleaned/city_total_observation_counts.csv"
+INDEPENDENT_VARS_FILE = "../data/cleaned/independent_variables_final.csv"
+OUTPUT_DIR = "../data/cleaned"
 OUTPUT_FILE = "the_data.csv"
 
 CITY_LIST = [

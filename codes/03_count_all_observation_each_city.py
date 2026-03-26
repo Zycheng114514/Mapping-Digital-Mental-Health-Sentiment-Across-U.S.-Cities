@@ -9,9 +9,9 @@ import multiprocessing as mp
 import pandas as pd
 from datetime import datetime
 
-ZST_FILES_LIST = "data/zst_files_list.txt"
-ZST_INPUT_DIR = "data/raw/reddit_zst"
-OUTPUT_DIR = "data/cleaned"
+ZST_FILES_LIST = "../data/zst_files_list.txt"
+ZST_INPUT_DIR = "../data/raw/reddit_zst"
+OUTPUT_DIR = "../data/cleaned"
 OUTPUT_FILE = "city_total_observation_counts.csv"
 
 NUM_WORKERS = None  # None means use all available cores

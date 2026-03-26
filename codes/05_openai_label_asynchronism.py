@@ -7,8 +7,8 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-INPUT_PATH = "data/cleaned/direct_corpus.csv"
-OUTPUT_PATH = "data/cleaned/direct_corpus_labelled.csv"
+INPUT_PATH = "../data/cleaned/direct_corpus.csv"
+OUTPUT_PATH = "../data/cleaned/direct_corpus_labelled.csv"
 
 RESULT_COLUMN = "is_negative"
 

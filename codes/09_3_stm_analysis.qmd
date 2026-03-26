@@ -25,8 +25,8 @@ pacman::p_load(
 # ==============================================================================
 
 # Load the data
-out <- readRDS("models/inputs/depression/out.rds")
-dta <- readRDS("models/inputs/depression/dta.rds")
+out <- readRDS("../models/inputs/depression/out.rds")
+dta <- readRDS("../models/inputs/depression/dta.rds")
 
 # Extract components
 docs <- out$documents
@@ -62,7 +62,7 @@ analyze_topic_model <- function(topic_models_list, estimates_list, custom_labels
     label_df <- data.frame(topic = 1:topic_number, label_text = model_labels)
     
     # --- Create Directory ---
-    output_dir <- paste0("plots/stm/model_K", topic_number, "/")
+    output_dir <- paste0("../plots/stm/model_K", topic_number, "/")
     dir.create(output_dir, recursive = TRUE, showWarnings = FALSE)
     
     # 1. Label Topics (Algo based)
@@ -170,8 +170,8 @@ analyze_topic_model <- function(topic_models_list, estimates_list, custom_labels
 # ==============================================================================
 
 # Load your specific model
-topic_model <- readRDS("models/R_topic_model/stm_topic_model_15.rds")
-estimated_model <- readRDS("models/R_topic_model/stm_topic_model_estimated_15.rds")
+topic_model <- readRDS("../models/R_topic_model/stm_topic_model_15.rds")
+estimated_model <- readRDS("../models/R_topic_model/stm_topic_model_estimated_15.rds")
 
 # Prepare lists
 my_models <- list(topic_model = topic_model)

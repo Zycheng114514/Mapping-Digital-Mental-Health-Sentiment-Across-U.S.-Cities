@@ -2,9 +2,9 @@ import pandas as pd
 import glob
 import os
 
-INPUT_DIR = "data/processed/by_city/negative"
-OUTPUT_DIR = "data/cleaned/direct_corpus.csv"
-WORD_LIST_FILE = "data/word_list_direct_words.txt"
+INPUT_DIR = "../data/processed/by_city/negative"
+OUTPUT_DIR = "../data/cleaned/direct_corpus.csv"
+WORD_LIST_FILE = "../data/word_list_direct_words.txt"
 
 depress_words = []
 with open(WORD_LIST_FILE, 'r', encoding='utf-8') as f:

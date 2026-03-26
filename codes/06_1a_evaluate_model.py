@@ -6,8 +6,8 @@ from transformers import AutoTokenizer, AutoModelForSequenceClassification
 from sklearn.metrics import precision_recall_fscore_support, accuracy_score
 import os
 
-DATA_PATH = "data/cleaned/direct_corpus_labelled.csv" 
-OUTPUT_DIR = "models/finetuned_categories"
+DATA_PATH = "../data/cleaned/direct_corpus_labelled.csv"
+OUTPUT_DIR = "../models/finetuned_categories"
 
 MAX_LEN = 256
 BATCH_SIZE = 64 

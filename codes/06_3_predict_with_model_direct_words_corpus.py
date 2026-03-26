@@ -5,9 +5,9 @@ from torch.utils.data import TensorDataset, DataLoader, SequentialSampler
 import os
 import numpy as np
 
-MODEL_DIR = "models/finetuned_categories"
-INPUT_CSV = "data/cleaned/direct_corpus.csv"
-OUTPUT_CSV = "data/cleaned/direct_corpus_predicted.csv"
+MODEL_DIR = "../models/finetuned_categories"
+INPUT_CSV = "../data/cleaned/direct_corpus.csv"
+OUTPUT_CSV = "../data/cleaned/direct_corpus_predicted.csv"
 BATCH_SIZE = 64
 MAX_LEN = 256
 NUM_LABELS = 2

@@ -12,7 +12,7 @@ p_load(tidyverse,ggplot2)
 ```
 
 ```{r}
-dta <- read_excel("data/cleaned/final_data.xlsx")
+dta <- read_excel("../data/cleaned/final_data.xlsx")
 ```
 
 ```{r}

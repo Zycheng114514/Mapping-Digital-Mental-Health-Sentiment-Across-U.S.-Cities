@@ -6,8 +6,8 @@ into one submissions file and one comments file per city and put the result unde
 import os
 import pandas as pd
 
-INPUT_DIR = "data/processed"
-OUTPUT_DIR = "data/processed/by_city"
+INPUT_DIR = "../data/processed"
+OUTPUT_DIR = "../data/processed/by_city"
 
 CITY_SUBREDDIT_MAP = {
     "Chicago": ["AskChicago", "chicago"],

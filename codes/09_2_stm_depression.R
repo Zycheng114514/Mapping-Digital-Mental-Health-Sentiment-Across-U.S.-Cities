@@ -3,7 +3,7 @@ library(stm)
 library(lubridate)
 library(quanteda)
 
-dta <- read_csv("data/cleaned/depression_corpus_predicted.csv")
+dta <- read_csv("../data/cleaned/depression_corpus_predicted.csv")
 
 dta <- dta %>%
   mutate(date_numeric = as.numeric(as.Date(date)))%>%
@@ -56,11 +56,11 @@ estimate_model <- estimateEffect(
   uncertainty = "Global"
 )
 
-dir.create("models/R_topic_model", recursive = TRUE, showWarnings = FALSE)
-saveRDS(topic_model, "models/R_topic_model/stm_topic_model_15.rds")
-saveRDS(estimate_model, "models/R_topic_model/stm_topic_model_estimated_15.rds")
+dir.create("../models/R_topic_model", recursive = TRUE, showWarnings = FALSE)
+saveRDS(topic_model, "../models/R_topic_model/stm_topic_model_15.rds")
+saveRDS(estimate_model, "../models/R_topic_model/stm_topic_model_estimated_15.rds")
 
-dir.create("models/inputs/depression", recursive = TRUE, showWarnings = FALSE)
-saveRDS(out, "models/inputs/depression/out.rds")
-saveRDS(dta, "models/inputs/depression/dta.rds")
+dir.create("../models/inputs/depression", recursive = TRUE, showWarnings = FALSE)
+saveRDS(out, "../models/inputs/depression/out.rds")
+saveRDS(dta, "../models/inputs/depression/dta.rds")
 
